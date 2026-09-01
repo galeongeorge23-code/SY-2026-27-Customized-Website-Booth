@@ -5,142 +5,320 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Message Booth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Poppins:wght@400;500;600;700&family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Poppins:wght@400;500;600;700&family=Archivo+Black&family=Inter:wght@400;500;600&family=Caveat:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #F1EFE7;
-    --accent: #2B3A4A;
-    --text: #24303B;
-    --card-bg: #FFFFFF;
-  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg);
-    color: var(--text);
     font-family: 'Inter', sans-serif;
     padding: 24px;
-    transition: background 0.4s ease;
+    transition: background 0.3s ease;
+    overflow: hidden;
   }
 
-  /* ---------- CARD (the personalized message) ---------- */
+  /* ===== ENVELOPE ANIMATION ===== */
+  .envelope-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    perspective: 1000px;
+  }
+  .envelope-wrapper.open .envelope { animation: envelopeOpen 0.8s ease forwards; }
+  .envelope-wrapper.open .card { animation: cardSlideOut 0.8s ease 0.4s forwards; }
+
+  @keyframes envelopeOpen {
+    0% { transform: rotateX(0deg); opacity: 1; }
+    50% { transform: rotateX(-60deg); }
+    100% { transform: rotateX(-90deg); opacity: 0; }
+  }
+  @keyframes cardSlideOut {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  .envelope {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: #F5E6D3;
+    border: 2px solid #D4AF91;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    transform-origin: top;
+    transform-style: preserve-3d;
+  }
+  .envelope::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 50%;
+    background: linear-gradient(135deg, #E8D5BD 0%, #D4AF91 100%);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+  }
+  .envelope::after {
+    content: 'Tap to open';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: #8B7355;
+    opacity: 0.6;
+    text-align: center;
+    cursor: pointer;
+    pointer-events: all;
+  }
+
+  /* ===== CARD BASE ===== */
   .card {
     width: 100%;
     max-width: 480px;
+    margin: 0 auto;
     padding: 56px 40px;
     position: relative;
   }
-  .card .from {
-    font-size: 14px;
-    letter-spacing: 0.02em;
-    opacity: 0.65;
-    margin-bottom: 18px;
-  }
-  .card .to {
-    font-size: 15px;
-    opacity: 0.8;
-    margin-bottom: 8px;
-  }
-  .card .message {
-    font-size: 28px;
-    line-height: 1.35;
-    margin: 18px 0 28px;
-  }
-  .card .sign {
-    font-size: 15px;
-    opacity: 0.7;
-  }
+  .card .from { font-size: 14px; margin-bottom: 18px; }
+  .card .to { font-size: 15px; margin-bottom: 8px; }
+  .card .message { font-size: 28px; line-height: 1.35; margin: 18px 0 28px; }
+  .card .sign { font-size: 15px; }
 
-  /* ---------- THEME: ROMANCE ---------- */
+  /* ===== THEME: ROMANCE ===== */
   body.romance {
-    --bg: #F7E8E3;
-    --accent: #B23A48;
-    --text: #4A2A2E;
+    background: linear-gradient(135deg, #F7E8E3 0%, #F5E6DD 100%);
   }
   body.romance .card {
-    background: var(--card-bg);
-    border-radius: 2px;
-    box-shadow: 0 20px 60px -20px rgba(178,58,72,0.25);
+    background: #FFFBF8;
+    border-radius: 8px;
+    border: 1px solid #F0D9CE;
+    box-shadow: 0 24px 48px -20px rgba(178,58,72,0.2);
   }
   body.romance .card::before {
     content: '';
     position: absolute;
-    top: -18px; left: 40px;
-    width: 36px; height: 36px;
+    top: -24px; left: 40px;
+    width: 40px; height: 40px;
     border-radius: 50%;
-    background: var(--accent);
+    background: linear-gradient(135deg, #B23A48 0%, #C85560 100%);
+    box-shadow: 0 4px 12px rgba(178,58,72,0.3);
   }
-  body.romance .to, body.romance .from { font-family: 'Inter', sans-serif; }
+  body.romance .to, body.romance .from {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #6B4949;
+    opacity: 0.7;
+  }
   body.romance .message {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 500;
-    color: var(--accent);
+    color: #B23A48;
+    letter-spacing: 0.02em;
   }
-  body.romance .sign { font-family: 'Cormorant Garamond', serif; font-size: 19px; }
+  body.romance .sign {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #B23A48;
+  }
 
-  /* ---------- THEME: CASUAL ---------- */
+  /* ===== THEME: CASUAL ===== */
   body.casual {
-    --bg: #F1EFE7;
-    --accent: #2B3A4A;
-    --text: #24303B;
+    background: #F9F7F3;
   }
   body.casual .card {
-    background: var(--card-bg);
-    border-radius: 14px;
-    border: 1px solid rgba(43,58,74,0.1);
-    box-shadow: 0 12px 32px -16px rgba(43,58,74,0.18);
-    text-align: left;
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 2px solid #E8D5C4;
+    box-shadow: 0 16px 40px -12px rgba(43,58,74,0.12);
   }
-  body.casual .from, body.casual .to {
+  body.casual .to, body.casual .from {
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 13px;
+    color: #5A7380;
   }
   body.casual .message {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    color: var(--accent);
+    color: #2B3A4A;
   }
-  body.casual .sign { font-family: 'Poppins', sans-serif; font-weight: 500; }
+  body.casual .sign {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #7A8B97;
+  }
 
-  /* ---------- THEME: FUNNY / MEME ---------- */
+  /* ===== THEME: FUNNY / MEME ===== */
   body.funny {
-    --bg: #101010;
-    --accent: #FFD500;
-    --text: #FFFFFF;
+    background: #0A0A0A;
   }
   body.funny .card {
     text-align: center;
     padding: 40px 20px;
   }
-  body.funny .from { color: var(--accent); font-family: 'Poppins', sans-serif; font-weight: 600; }
-  body.funny .to { font-family: 'Poppins', sans-serif; opacity: 0.7; }
+  body.funny .from {
+    color: #FFD500;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  body.funny .to {
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    opacity: 0.8;
+  }
   body.funny .message {
     font-family: 'Archivo Black', sans-serif;
     text-transform: uppercase;
-    font-size: 34px;
-    line-height: 1.15;
+    font-size: 40px;
+    line-height: 1.1;
     color: #fff;
-    -webkit-text-stroke: 1px var(--accent);
-    letter-spacing: 0.01em;
+    -webkit-text-stroke: 1.5px #FFD500;
+    letter-spacing: -0.01em;
   }
-  body.funny .sign { font-family: 'Poppins', sans-serif; color: var(--accent); font-weight: 600; }
+  body.funny .sign {
+    font-family: 'Poppins', sans-serif;
+    color: #FFD500;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
 
-  /* ---------- GENERATOR (staff view) ---------- */
+  /* ===== THEME: SPIDERMAN ===== */
+  body.spiderman {
+    background: linear-gradient(135deg, #E6003C 0%, #0033A0 100%);
+  }
+  body.spiderman .card {
+    background: #FFFFFF;
+    border-radius: 0;
+    border: 4px solid #000;
+    box-shadow: 0 12px 32px -16px rgba(0,0,0,0.4), inset 0 0 0 2px #FFD700;
+    position: relative;
+  }
+  body.spiderman .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 8px;
+    background: repeating-linear-gradient(90deg, #E6003C 0, #E6003C 20px, #0033A0 20px, #0033A0 40px);
+  }
+  body.spiderman .to {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    color: #E6003C;
+    text-transform: uppercase;
+  }
+  body.spiderman .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #0033A0;
+    font-size: 12px;
+  }
+  body.spiderman .message {
+    font-family: 'Archivo Black', sans-serif;
+    color: #000;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0 #FFD700;
+    font-weight: 900;
+  }
+  body.spiderman .sign {
+    font-family: 'Archivo Black', sans-serif;
+    color: #E6003C;
+    font-weight: 900;
+  }
+
+  /* ===== THEME: CROCHET ===== */
+  body.crochet {
+    background: linear-gradient(135deg, #E8D7CC 0%, #F0E4D8 100%);
+  }
+  body.crochet .card {
+    background: linear-gradient(135deg, #F5EBE0 0%, #FDEBD7 100%);
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 20px 50px -20px rgba(139,93,67,0.25);
+    position: relative;
+  }
+  body.crochet .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,93,67,0.02) 2px, rgba(139,93,67,0.02) 4px);
+    border-radius: 20px;
+    pointer-events: none;
+  }
+  body.crochet .to, body.crochet .from {
+    font-family: 'Poppins', sans-serif;
+    color: #A67055;
+    font-weight: 500;
+  }
+  body.crochet .message {
+    font-family: 'Caveat', cursive;
+    font-size: 36px;
+    font-weight: 400;
+    color: #8B5D43;
+    letter-spacing: 0.03em;
+  }
+  body.crochet .sign {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    color: #A67055;
+  }
+
+  /* ===== THEME: HANDWRITTEN ===== */
+  body.handwritten {
+    background: linear-gradient(135deg, #FAF8F3 0%, #F5F1EA 100%);
+  }
+  body.handwritten .card {
+    background: linear-gradient(2deg, #FFFDF9 0%, #FFFCF7 100%);
+    border-radius: 2px;
+    border: 1px solid #E8DFD3;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.1), inset 0 1px 3px rgba(255,255,255,0.8);
+  }
+  body.handwritten .to, body.handwritten .from {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: #5C3F36;
+    font-weight: 600;
+  }
+  body.handwritten .message {
+    font-family: 'Caveat', cursive;
+    font-size: 42px;
+    font-weight: 400;
+    color: #3A2E2A;
+    letter-spacing: 0.02em;
+  }
+  body.handwritten .sign {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: #5C3F36;
+  }
+  body.handwritten .card::before {
+    content: '';
+    position: absolute;
+    top: 30px; right: 24px;
+    width: 24px; height: 24px;
+    border: 2px solid #D4C0B0;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  /* ===== GENERATOR (staff view) ===== */
   .generator {
-    width: 100%;
-    max-width: 440px;
     background: #fff;
     border-radius: 14px;
     padding: 32px;
     box-shadow: 0 12px 32px -16px rgba(0,0,0,0.15);
+    max-width: 440px;
+    width: 100%;
   }
-  .generator h1 { font-family: 'Poppins', sans-serif; font-size: 20px; margin-bottom: 4px; }
+  .generator h1 { font-family: 'Poppins', sans-serif; font-size: 20px; margin-bottom: 4px; color: #2B3A4A; }
   .generator p.sub { font-size: 13px; opacity: 0.6; margin-bottom: 20px; }
-  .generator label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 6px; }
+  .generator label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 6px; color: #2B3A4A; }
   .generator input, .generator textarea, .generator select {
     width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px;
     font-family: 'Inter', sans-serif; font-size: 14px;
@@ -149,7 +327,7 @@
   .generator button {
     margin-top: 20px; width: 100%; padding: 12px; border: none; border-radius: 8px;
     background: #2B3A4A; color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600;
-    font-size: 14px; cursor: pointer;
+    font-size: 14px; cursor: pointer; transition: opacity 0.2s;
   }
   .generator button:hover { opacity: 0.9; }
   .result { margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px; font-size: 12px; word-break: break-all; display: none; }
@@ -174,13 +352,26 @@
   if (to || from || message) {
     // ---- RENDER PERSONALIZED CARD ----
     document.body.className = theme;
-    root.innerHTML = `
+    const wrapper = document.createElement('div');
+    wrapper.className = 'envelope-wrapper';
+    wrapper.innerHTML = `
+      <div class="envelope"></div>
       <div class="card">
         <div class="to">${to ? 'To ' + escapeHtml(to) : ''}</div>
         <div class="message">${escapeHtml(message || '')}</div>
         <div class="sign">${from ? '— ' + escapeHtml(from) : ''}</div>
       </div>
     `;
+    root.appendChild(wrapper);
+
+    wrapper.querySelector('.envelope').addEventListener('click', () => {
+      wrapper.classList.add('open');
+    });
+    wrapper.querySelector('.envelope').addEventListener('touchstart', () => {
+      wrapper.classList.add('open');
+    });
+
+    setTimeout(() => wrapper.classList.add('open'), 500);
   } else {
     // ---- RENDER STAFF GENERATOR FORM ----
     root.innerHTML = `
@@ -198,6 +389,9 @@
           <option value="romance">Romance</option>
           <option value="casual" selected>Casual</option>
           <option value="funny">Funny / Meme</option>
+          <option value="spiderman">Spiderman</option>
+          <option value="crochet">Crochet</option>
+          <option value="handwritten">Handwritten</option>
         </select>
         <button id="g-generate">Generate link</button>
         <div id="g-result" class="result">
