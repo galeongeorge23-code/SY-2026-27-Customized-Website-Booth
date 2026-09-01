@@ -72,13 +72,19 @@
     pointer-events: all;
   }
 
-  /* ===== CARD BASE ===== *
+  /* ===== CARD BASE ===== */
   .card {
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
     padding: 56px 40px;
     position: relative;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .envelope-wrapper.open .card {
+    opacity: 1;
+    pointer-events: auto;
   }
   .card .from { font-size: 14px; margin-bottom: 18px; }
   .card .to { font-size: 15px; margin-bottom: 8px; }
@@ -370,8 +376,6 @@
     wrapper.querySelector('.envelope').addEventListener('touchstart', () => {
       wrapper.classList.add('open');
     });
-
-    setTimeout(() => wrapper.classList.add('open'), 500);
   } else {
     // ---- RENDER STAFF GENERATOR FORM ----
     root.innerHTML = `
