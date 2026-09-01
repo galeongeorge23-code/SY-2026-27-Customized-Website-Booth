@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Message Booth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -283,69 +283,115 @@
     color: #5C3F36;
   }
 
-  /* ===== THEME: MODERN ===== */
+  /* ===== THEME: MODERN (TECH/NEON) ===== */
   body.modern {
-    background: #F5F5F5;
+    background: #0D0D0D;
+    background-image: 
+      linear-gradient(0deg, transparent 24%, rgba(0, 255, 200, 0.05) 25%, rgba(0, 255, 200, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 200, 0.05) 75%, rgba(0, 255, 200, 0.05) 76%, transparent 77%, transparent),
+      linear-gradient(90deg, transparent 24%, rgba(0, 255, 200, 0.05) 25%, rgba(0, 255, 200, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 200, 0.05) 75%, rgba(0, 255, 200, 0.05) 76%, transparent 77%, transparent);
+    background-size: 60px 60px;
   }
-  body.modern .headline { color: #1A1A1A; font-weight: 700; }
-  body.modern .subheadline { color: #666; }
+  body.modern .headline { color: #00FFC8; font-weight: 700; letter-spacing: 0.15em; }
+  body.modern .subheadline { color: #00FFC8; opacity: 0.6; }
   body.modern .card {
-    background: #FFFFFF;
+    background: #1A1A1A;
     border-radius: 0;
-    border: 2px solid #000;
-    box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+    border: 3px solid #00FFC8;
+    box-shadow: 0 0 30px rgba(0, 255, 200, 0.3), inset 0 0 30px rgba(0, 255, 200, 0.05);
+    position: relative;
+  }
+  body.modern .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(0, 255, 200, 0.03) 50%, transparent 100%);
+    pointer-events: none;
   }
   body.modern .to, body.modern .from {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #000;
+    letter-spacing: 0.2em;
+    color: #00FFC8;
+    opacity: 0.8;
   }
   body.modern .message {
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #1A1A1A;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
   body.modern .sign {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    color: #000;
+    color: #00FFC8;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
   }
 
-  /* ===== THEME: PROFESSIONAL ===== */
+  /* ===== THEME: PROFESSIONAL (LUXURY CERTIFICATE) ===== */
   body.professional {
-    background: linear-gradient(135deg, #ECF0F5 0%, #E8EDF2 100%);
+    background: linear-gradient(135deg, #F4EDE4 0%, #EFE6DC 100%);
   }
-  body.professional .headline { color: #1E3A5F; font-weight: 700; }
-  body.professional .subheadline { color: #4A6B8A; }
+  body.professional .headline { 
+    font-family: 'Playfair Display', serif;
+    color: #5D4E37; 
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 0.08em;
+  }
+  body.professional .subheadline { color: #9B8B7E; font-weight: 600; }
   body.professional .card {
-    background: #FFFFFF;
-    border-radius: 8px;
-    border: 1px solid #D0D8E0;
-    box-shadow: 0 12px 32px -8px rgba(30,58,95,0.15);
+    background: #FDFAF6;
+    border-radius: 0;
+    border: 3px solid #D4AF37;
+    box-shadow: 0 20px 50px -15px rgba(93,78,55,0.3), 
+                inset 0 0 40px rgba(212,175,55,0.1),
+                0 0 0 1px rgba(212,175,55,0.5);
+    position: relative;
+    padding-left: 56px !important;
+  }
+  body.professional .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 12px;
+    background: linear-gradient(90deg, #D4AF37 0%, #E8C547 50%, #D4AF37 100%);
+  }
+  body.professional .card::after {
+    content: '';
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 48px; height: 48px;
+    border: 2px solid #D4AF37;
+    border-radius: 50%;
+    opacity: 0.3;
   }
   body.professional .to, body.professional .from {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #4A6B8A;
+    font-size: 14px;
+    color: #5D4E37;
+    letter-spacing: 0.05em;
   }
   body.professional .message {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    color: #1E3A5F;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #5D4E37;
+    font-size: 28px;
+    letter-spacing: 0.03em;
+    line-height: 1.5;
   }
   body.professional .sign {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    color: #4A6B8A;
-    font-size: 12px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #5D4E37;
+    font-size: 18px;
+    letter-spacing: 0.05em;
   }
 
   /* ===== THEME: WARM ===== */
