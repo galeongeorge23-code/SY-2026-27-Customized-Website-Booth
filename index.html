@@ -42,14 +42,19 @@
   .envelope {
     width: 100%;
     aspect-ratio: 16 / 10;
-    background: #F5E6D3;
+    background: linear-gradient(to bottom, #F5E6D3 0%, #F8EBD8 100%);
     border: 2px solid #D4AF91;
-    border-radius: 4px;
+    border-radius: 2px;
     position: relative;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
     transform-origin: top;
     transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
+
   .envelope::before {
     content: '';
     position: absolute;
@@ -58,18 +63,49 @@
     background: linear-gradient(135deg, #E8D5BD 0%, #D4AF91 100%);
     clip-path: polygon(0 0, 50% 100%, 100% 0);
     border-bottom: 2px solid rgba(0,0,0,0.1);
+    z-index: 2;
   }
+
   .envelope::after {
-    content: 'Tap to open';
+    content: '';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 14px;
-    color: #8B7355;
-    opacity: 0.6;
+    width: 56px;
+    height: 56px;
+    background: radial-gradient(circle at 30% 30%, #D4691A, #8B4513);
+    border-radius: 50%;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.2);
+    z-index: 3;
+  }
+
+  .envelope-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
     text-align: center;
-    cursor: pointer;
-    pointer-events: all;
+    pointer-events: none;
+  }
+
+  .envelope-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #8B5D43;
+    letter-spacing: 0.08em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .envelope-subline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #A67055;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+    text-transform: uppercase;
   }
 
   /* ===== CARD BASE ===== */
@@ -77,19 +113,21 @@
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
-    padding: 56px 40px;
+    padding: 40px 32px;
     position: relative;
     opacity: 0;
     pointer-events: none;
+    max-height: 80vh;
+    overflow-y: auto;
   }
   .envelope-wrapper.open .card {
     opacity: 1;
     pointer-events: auto;
   }
-  .card .from { font-size: 14px; margin-bottom: 18px; }
-  .card .to { font-size: 15px; margin-bottom: 8px; }
-  .card .message { font-size: 28px; line-height: 1.35; margin: 18px 0 28px; }
-  .card .sign { font-size: 15px; }
+  .card .from { font-size: 12px; margin-bottom: 12px; }
+  .card .to { font-size: 13px; margin-bottom: 6px; }
+  .card .message { font-size: 24px; line-height: 1.35; margin: 12px 0 16px; }
+  .card .sign { font-size: 13px; }
 
   /* ===== THEME: ROMANCE ===== */
   body.romance {
@@ -361,7 +399,12 @@
     const wrapper = document.createElement('div');
     wrapper.className = 'envelope-wrapper';
     wrapper.innerHTML = `
-      <div class="envelope"></div>
+      <div class="envelope">
+        <div class="envelope-text">
+          <p class="envelope-headline">Message</p>
+          <p class="envelope-subline">Tap to reveal</p>
+        </div>
+      </div>
       <div class="card">
         <div class="to">${to ? 'To ' + escapeHtml(to) : ''}</div>
         <div class="message">${escapeHtml(message || '')}</div>
