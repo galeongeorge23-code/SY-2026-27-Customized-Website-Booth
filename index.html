@@ -5,26 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Message Booth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Poppins:wght@400;500;600;700&family=Archivo+Black&family=Inter:wght@400;500;600&family=Caveat:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
   body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     font-family: 'Inter', sans-serif;
-    padding: 24px;
+    padding: 32px 24px;
     transition: background 0.3s ease;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .headline-section {
+    text-align: center;
+    margin-bottom: 32px;
+    width: 100%;
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .subheadline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    opacity: 0.65;
+    text-transform: uppercase;
   }
 
   /* ===== ENVELOPE ANIMATION ===== */
   .envelope-wrapper {
     position: relative;
     width: 100%;
-    max-width: 520px;
+    max-width: 540px;
     perspective: 1000px;
+    margin-bottom: 32px;
   }
   .envelope-wrapper.open .envelope { animation: envelopeOpen 0.8s ease forwards; }
   .envelope-wrapper.open .card { animation: cardSlideOut 0.8s ease 0.4s forwards; }
@@ -41,42 +73,66 @@
 
   .envelope {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    background: linear-gradient(to bottom, #F5E6D3 0%, #F8EBD8 100%);
-    border: 2px solid #D4AF91;
-    border-radius: 2px;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #F8EBD8 0%, #F5E6D3 100%);
+    border: 3px solid #D4AF91;
+    border-radius: 1px;
     position: relative;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
+    box-shadow: 0 20px 50px -15px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.6), 0 -1px 0 rgba(0,0,0,0.05);
     transform-origin: top;
     transform-style: preserve-3d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
+    overflow: hidden;
   }
 
   .envelope::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 100%; height: 50%;
-    background: linear-gradient(135deg, #E8D5BD 0%, #D4AF91 100%);
+    width: 100%; height: 48%;
+    background: linear-gradient(135deg, #EFD9C5 0%, #D4AF91 100%);
     clip-path: polygon(0 0, 50% 100%, 100% 0);
-    border-bottom: 2px solid rgba(0,0,0,0.1);
-    z-index: 2;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
   }
 
-  .envelope::after {
-    content: '';
+  .envelope-decoration {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 56px;
-    height: 56px;
-    background: radial-gradient(circle at 30% 30%, #D4691A, #8B4513);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .envelope-stamp {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 52px;
+    height: 64px;
+    background: linear-gradient(135deg, #E6B8A2 0%, #D4A574 100%);
+    border: 2px dashed #B8956A;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .envelope-line {
+    position: absolute;
+    background: rgba(139,93,67,0.15);
+  }
+  .line-1 { top: 20px; left: 20px; right: 100px; height: 1px; }
+  .line-2 { top: 32px; left: 20px; width: 140px; height: 1px; }
+  .line-3 { bottom: 24px; left: 20px; right: 80px; height: 1px; }
+
+  .envelope-seal {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 72px;
+    height: 72px;
+    background: radial-gradient(circle at 30% 30%, #C85A3A, #8B3A1C);
     border-radius: 50%;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 -2px 5px rgba(0,0,0,0.4), inset 0 1px 3px rgba(255,255,255,0.2);
     z-index: 3;
+    border: 2px solid #6B2817;
   }
 
   .envelope-text {
@@ -84,41 +140,40 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 4;
+    z-index: 2;
     text-align: center;
     pointer-events: none;
   }
 
-  .envelope-headline {
+  .envelope-main {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 600;
     color: #8B5D43;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     margin: 0;
     text-transform: uppercase;
   }
 
-  .envelope-subline {
+  .envelope-sub {
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     color: #A67055;
-    letter-spacing: 0.1em;
-    margin-top: 4px;
+    letter-spacing: 0.12em;
+    margin-top: 6px;
     text-transform: uppercase;
+    font-weight: 500;
   }
 
   /* ===== CARD BASE ===== */
   .card {
     width: 100%;
-    max-width: 480px;
+    max-width: 520px;
     margin: 0 auto;
-    padding: 40px 32px;
+    padding: 48px 40px;
     position: relative;
     opacity: 0;
     pointer-events: none;
-    max-height: 80vh;
-    overflow-y: auto;
   }
   .envelope-wrapper.open .card {
     opacity: 1;
@@ -126,32 +181,23 @@
   }
   .card .from { font-size: 12px; margin-bottom: 12px; }
   .card .to { font-size: 13px; margin-bottom: 6px; }
-  .card .message { font-size: 24px; line-height: 1.35; margin: 12px 0 16px; }
+  .card .message { font-size: 24px; line-height: 1.4; margin: 12px 0 16px; }
   .card .sign { font-size: 13px; }
 
   /* ===== THEME: ROMANCE ===== */
   body.romance {
     background: linear-gradient(135deg, #F7E8E3 0%, #F5E6DD 100%);
   }
+  body.romance .headline { color: #B23A48; }
+  body.romance .subheadline { color: #8B6B6F; }
   body.romance .card {
     background: #FFFBF8;
     border-radius: 8px;
     border: 1px solid #F0D9CE;
     box-shadow: 0 24px 48px -20px rgba(178,58,72,0.2);
   }
-  body.romance .card::before {
-    content: '';
-    position: absolute;
-    top: -24px; left: 40px;
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #B23A48 0%, #C85560 100%);
-    box-shadow: 0 4px 12px rgba(178,58,72,0.3);
-  }
   body.romance .to, body.romance .from {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.08em;
     color: #6B4949;
     opacity: 0.7;
   }
@@ -172,6 +218,8 @@
   body.casual {
     background: #F9F7F3;
   }
+  body.casual .headline { color: #2B3A4A; }
+  body.casual .subheadline { color: #7A8B97; }
   body.casual .card {
     background: #FFFFFF;
     border-radius: 16px;
@@ -181,7 +229,6 @@
   body.casual .to, body.casual .from {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 13px;
     color: #5A7380;
   }
   body.casual .message {
@@ -195,133 +242,27 @@
     color: #7A8B97;
   }
 
-  /* ===== THEME: FUNNY / MEME ===== */
-  body.funny {
-    background: #0A0A0A;
-  }
-  body.funny .card {
-    text-align: center;
-    padding: 40px 20px;
-  }
-  body.funny .from {
-    color: #FFD500;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  body.funny .to {
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    opacity: 0.8;
-  }
-  body.funny .message {
-    font-family: 'Archivo Black', sans-serif;
-    text-transform: uppercase;
-    font-size: 40px;
-    line-height: 1.1;
-    color: #fff;
-    -webkit-text-stroke: 1.5px #FFD500;
-    letter-spacing: -0.01em;
-  }
-  body.funny .sign {
-    font-family: 'Poppins', sans-serif;
-    color: #FFD500;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 13px;
-  }
-
-  /* ===== THEME: SPIDERMAN ===== */
-  body.spiderman {
-    background: linear-gradient(135deg, #E6003C 0%, #0033A0 100%);
-  }
-  body.spiderman .card {
-    background: #FFFFFF;
-    border-radius: 0;
-    border: 4px solid #000;
-    box-shadow: 0 12px 32px -16px rgba(0,0,0,0.4), inset 0 0 0 2px #FFD700;
-    position: relative;
-  }
-  body.spiderman .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 8px;
-    background: repeating-linear-gradient(90deg, #E6003C 0, #E6003C 20px, #0033A0 20px, #0033A0 40px);
-  }
-  body.spiderman .to {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 14px;
-    color: #E6003C;
-    text-transform: uppercase;
-  }
-  body.spiderman .from {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    color: #0033A0;
-    font-size: 12px;
-  }
-  body.spiderman .message {
-    font-family: 'Archivo Black', sans-serif;
-    color: #000;
-    text-transform: uppercase;
-    text-shadow: 3px 3px 0 #FFD700;
-    font-weight: 900;
-  }
-  body.spiderman .sign {
-    font-family: 'Archivo Black', sans-serif;
-    color: #E6003C;
-    font-weight: 900;
-  }
-
-  /* ===== THEME: CROCHET ===== */
-  body.crochet {
-    background: linear-gradient(135deg, #E8D7CC 0%, #F0E4D8 100%);
-  }
-  body.crochet .card {
-    background: linear-gradient(135deg, #F5EBE0 0%, #FDEBD7 100%);
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 20px 50px -20px rgba(139,93,67,0.25);
-    position: relative;
-  }
-  body.crochet .card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: 
-      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,93,67,0.02) 2px, rgba(139,93,67,0.02) 4px);
-    border-radius: 20px;
-    pointer-events: none;
-  }
-  body.crochet .to, body.crochet .from {
-    font-family: 'Poppins', sans-serif;
-    color: #A67055;
-    font-weight: 500;
-  }
-  body.crochet .message {
-    font-family: 'Caveat', cursive;
-    font-size: 36px;
-    font-weight: 400;
-    color: #8B5D43;
-    letter-spacing: 0.03em;
-  }
-  body.crochet .sign {
-    font-family: 'Caveat', cursive;
-    font-size: 24px;
-    color: #A67055;
-  }
-
-  /* ===== THEME: HANDWRITTEN ===== */
+  /* ===== THEME: HANDWRITTEN (PAPER PAD) ===== */
   body.handwritten {
-    background: linear-gradient(135deg, #FAF8F3 0%, #F5F1EA 100%);
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFEDD1 100%);
   }
+  body.handwritten .headline { color: #D4A017; font-size: 32px; }
+  body.handwritten .subheadline { color: #B8860B; }
   body.handwritten .card {
-    background: linear-gradient(2deg, #FFFDF9 0%, #FFFCF7 100%);
+    background: linear-gradient(to right, #FFFBF0 0%, #FFFEF9 100%);
     border-radius: 2px;
     border: 1px solid #E8DFD3;
-    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.1), inset 0 1px 3px rgba(255,255,255,0.8);
+    box-shadow: 0 12px 28px -8px rgba(139,105,20,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative;
+  }
+  body.handwritten .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 100%;
+    background: #D4A017;
   }
   body.handwritten .to, body.handwritten .from {
     font-family: 'Caveat', cursive;
@@ -341,14 +282,98 @@
     font-size: 28px;
     color: #5C3F36;
   }
-  body.handwritten .card::before {
-    content: '';
-    position: absolute;
-    top: 30px; right: 24px;
-    width: 24px; height: 24px;
-    border: 2px solid #D4C0B0;
-    border-radius: 50%;
-    opacity: 0.4;
+
+  /* ===== THEME: MODERN ===== */
+  body.modern {
+    background: #F5F5F5;
+  }
+  body.modern .headline { color: #1A1A1A; font-weight: 700; }
+  body.modern .subheadline { color: #666; }
+  body.modern .card {
+    background: #FFFFFF;
+    border-radius: 0;
+    border: 2px solid #000;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+  }
+  body.modern .to, body.modern .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #000;
+  }
+  body.modern .message {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+  body.modern .sign {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  /* ===== THEME: PROFESSIONAL ===== */
+  body.professional {
+    background: linear-gradient(135deg, #ECF0F5 0%, #E8EDF2 100%);
+  }
+  body.professional .headline { color: #1E3A5F; font-weight: 700; }
+  body.professional .subheadline { color: #4A6B8A; }
+  body.professional .card {
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #D0D8E0;
+    box-shadow: 0 12px 32px -8px rgba(30,58,95,0.15);
+  }
+  body.professional .to, body.professional .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #4A6B8A;
+  }
+  body.professional .message {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #1E3A5F;
+  }
+  body.professional .sign {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #4A6B8A;
+    font-size: 12px;
+  }
+
+  /* ===== THEME: WARM ===== */
+  body.warm {
+    background: linear-gradient(135deg, #F5E6D3 0%, #F9EBD9 100%);
+  }
+  body.warm .headline { color: #A67055; }
+  body.warm .subheadline { color: #C99070; }
+  body.warm .card {
+    background: linear-gradient(135deg, #FDFAF6 0%, #FFFCF9 100%);
+    border-radius: 12px;
+    border: 2px solid #E8D5C4;
+    box-shadow: 0 16px 40px -12px rgba(166,112,85,0.15);
+  }
+  body.warm .to, body.warm .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #8B6F63;
+  }
+  body.warm .message {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #A67055;
+  }
+  body.warm .sign {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #8B6F63;
   }
 
   /* ===== GENERATOR (staff view) ===== */
@@ -359,6 +384,7 @@
     box-shadow: 0 12px 32px -16px rgba(0,0,0,0.15);
     max-width: 440px;
     width: 100%;
+    margin-top: 32px;
   }
   .generator h1 { font-family: 'Poppins', sans-serif; font-size: 20px; margin-bottom: 4px; color: #2B3A4A; }
   .generator p.sub { font-size: 13px; opacity: 0.6; margin-bottom: 20px; }
@@ -396,13 +422,30 @@
   if (to || from || message) {
     // ---- RENDER PERSONALIZED CARD ----
     document.body.className = theme;
+    const container = document.createElement('div');
+    container.className = 'page-container';
+    
+    const headline = document.createElement('div');
+    headline.className = 'headline-section';
+    headline.innerHTML = `
+      <h1 class="headline">A Message For You</h1>
+      <p class="subheadline">Tap the envelope to reveal</p>
+    `;
+
     const wrapper = document.createElement('div');
     wrapper.className = 'envelope-wrapper';
     wrapper.innerHTML = `
       <div class="envelope">
+        <div class="envelope-decoration">
+          <div class="envelope-stamp"></div>
+          <div class="envelope-line line-1"></div>
+          <div class="envelope-line line-2"></div>
+          <div class="envelope-line line-3"></div>
+        </div>
+        <div class="envelope-seal"></div>
         <div class="envelope-text">
-          <p class="envelope-headline">Message</p>
-          <p class="envelope-subline">Tap to reveal</p>
+          <p class="envelope-main">Message</p>
+          <p class="envelope-sub">Tap to reveal</p>
         </div>
       </div>
       <div class="card">
@@ -411,17 +454,23 @@
         <div class="sign">${from ? '— ' + escapeHtml(from) : ''}</div>
       </div>
     `;
-    root.appendChild(wrapper);
+
+    container.appendChild(headline);
+    container.appendChild(wrapper);
+    root.appendChild(container);
 
     wrapper.querySelector('.envelope').addEventListener('click', () => {
       wrapper.classList.add('open');
     });
-    wrapper.querySelector('.envelope').addEventListener('touchstart', () => {
+    wrapper.querySelector('.envelope').addEventListener('touchstart', (e) => {
+      e.preventDefault();
       wrapper.classList.add('open');
     });
   } else {
     // ---- RENDER STAFF GENERATOR FORM ----
-    root.innerHTML = `
+    const container = document.createElement('div');
+    container.className = 'page-container';
+    container.innerHTML = `
       <div class="generator">
         <h1>Message Booth Generator</h1>
         <p class="sub">Fill in the customer's details, generate their link.</p>
@@ -435,10 +484,10 @@
         <select id="g-theme">
           <option value="romance">Romance</option>
           <option value="casual" selected>Casual</option>
-          <option value="funny">Funny / Meme</option>
-          <option value="spiderman">Spiderman</option>
-          <option value="crochet">Crochet</option>
-          <option value="handwritten">Handwritten</option>
+          <option value="handwritten">Handwritten (Paper Pad)</option>
+          <option value="modern">Modern</option>
+          <option value="professional">Professional</option>
+          <option value="warm">Warm</option>
         </select>
         <button id="g-generate">Generate link</button>
         <div id="g-result" class="result">
@@ -447,6 +496,7 @@
         </div>
       </div>
     `;
+    root.appendChild(container);
 
     document.getElementById('g-generate').addEventListener('click', () => {
       const to = document.getElementById('g-to').value;
