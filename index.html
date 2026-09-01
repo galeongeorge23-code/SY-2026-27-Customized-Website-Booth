@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Booth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Poppins:wght@400;500;600;700&family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1EFE7;
+    --accent: #2B3A4A;
+    --text: #24303B;
+    --card-bg: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    padding: 24px;
+    transition: background 0.4s ease;
+  }
+
+  /* ---------- CARD (the personalized message) ---------- */
+  .card {
+    width: 100%;
+    max-width: 480px;
+    padding: 56px 40px;
+    position: relative;
+  }
+  .card .from {
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    opacity: 0.65;
+    margin-bottom: 18px;
+  }
+  .card .to {
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  .card .message {
+    font-size: 28px;
+    line-height: 1.35;
+    margin: 18px 0 28px;
+  }
+  .card .sign {
+    font-size: 15px;
+    opacity: 0.7;
+  }
+
+  /* ---------- THEME: ROMANCE ---------- */
+  body.romance {
+    --bg: #F7E8E3;
+    --accent: #B23A48;
+    --text: #4A2A2E;
+  }
+  body.romance .card {
+    background: var(--card-bg);
+    border-radius: 2px;
+    box-shadow: 0 20px 60px -20px rgba(178,58,72,0.25);
+  }
+  body.romance .card::before {
+    content: '';
+    position: absolute;
+    top: -18px; left: 40px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  body.romance .to, body.romance .from { font-family: 'Inter', sans-serif; }
+  body.romance .message {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  body.romance .sign { font-family: 'Cormorant Garamond', serif; font-size: 19px; }
+
+  /* ---------- THEME: CASUAL ---------- */
+  body.casual {
+    --bg: #F1EFE7;
+    --accent: #2B3A4A;
+    --text: #24303B;
+  }
+  body.casual .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    border: 1px solid rgba(43,58,74,0.1);
+    box-shadow: 0 12px 32px -16px rgba(43,58,74,0.18);
+    text-align: left;
+  }
+  body.casual .from, body.casual .to {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+  body.casual .message {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  body.casual .sign { font-family: 'Poppins', sans-serif; font-weight: 500; }
+
+  /* ---------- THEME: FUNNY / MEME ---------- */
+  body.funny {
+    --bg: #101010;
+    --accent: #FFD500;
+    --text: #FFFFFF;
+  }
+  body.funny .card {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  body.funny .from { color: var(--accent); font-family: 'Poppins', sans-serif; font-weight: 600; }
+  body.funny .to { font-family: 'Poppins', sans-serif; opacity: 0.7; }
+  body.funny .message {
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #fff;
+    -webkit-text-stroke: 1px var(--accent);
+    letter-spacing: 0.01em;
+  }
+  body.funny .sign { font-family: 'Poppins', sans-serif; color: var(--accent); font-weight: 600; }
+
+  /* ---------- GENERATOR (staff view) ---------- */
+  .generator {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 12px 32px -16px rgba(0,0,0,0.15);
+  }
+  .generator h1 { font-family: 'Poppins', sans-serif; font-size: 20px; margin-bottom: 4px; }
+  .generator p.sub { font-size: 13px; opacity: 0.6; margin-bottom: 20px; }
+  .generator label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 6px; }
+  .generator input, .generator textarea, .generator select {
+    width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 14px;
+  }
+  .generator textarea { resize: vertical; min-height: 70px; }
+  .generator button {
+    margin-top: 20px; width: 100%; padding: 12px; border: none; border-radius: 8px;
+    background: #2B3A4A; color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600;
+    font-size: 14px; cursor: pointer;
+  }
+  .generator button:hover { opacity: 0.9; }
+  .result { margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px; font-size: 12px; word-break: break-all; display: none; }
+  .result.show { display: block; }
+  .result a { color: #2B3A4A; font-weight: 600; }
+  .copy-btn { margin-top: 8px; font-size: 12px; padding: 6px 10px; width: auto; display: inline-block; }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const to = params.get('to');
+  const from = params.get('from');
+  const message = params.get('msg');
+  const theme = params.get('theme') || 'casual';
+
+  const root = document.getElementById('root');
+
+  if (to || from || message) {
+    // ---- RENDER PERSONALIZED CARD ----
+    document.body.className = theme;
+    root.innerHTML = `
+      <div class="card">
+        <div class="to">${to ? 'To ' + escapeHtml(to) : ''}</div>
+        <div class="message">${escapeHtml(message || '')}</div>
+        <div class="sign">${from ? '— ' + escapeHtml(from) : ''}</div>
+      </div>
+    `;
+  } else {
+    // ---- RENDER STAFF GENERATOR FORM ----
+    root.innerHTML = `
+      <div class="generator">
+        <h1>Message Booth Generator</h1>
+        <p class="sub">Fill in the customer's details, generate their link.</p>
+        <label>To</label>
+        <input id="g-to" placeholder="Recipient's name" />
+        <label>From</label>
+        <input id="g-from" placeholder="Sender's name" />
+        <label>Message</label>
+        <textarea id="g-msg" placeholder="Their message"></textarea>
+        <label>Theme</label>
+        <select id="g-theme">
+          <option value="romance">Romance</option>
+          <option value="casual" selected>Casual</option>
+          <option value="funny">Funny / Meme</option>
+        </select>
+        <button id="g-generate">Generate link</button>
+        <div id="g-result" class="result">
+          <div id="g-link"></div>
+          <button class="copy-btn" id="g-copy">Copy link</button>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('g-generate').addEventListener('click', () => {
+      const to = document.getElementById('g-to').value;
+      const from = document.getElementById('g-from').value;
+      const msg = document.getElementById('g-msg').value;
+      const theme = document.getElementById('g-theme').value;
+      const url = new URL(window.location.href);
+      url.search = '';
+      const p = new URLSearchParams();
+      if (to) p.set('to', to);
+      if (from) p.set('from', from);
+      if (msg) p.set('msg', msg);
+      p.set('theme', theme);
+      url.search = p.toString();
+
+      const resultDiv = document.getElementById('g-result');
+      const linkDiv = document.getElementById('g-link');
+      linkDiv.innerHTML = `<a href="${url.toString()}" target="_blank">${url.toString()}</a>`;
+      resultDiv.classList.add('show');
+
+      document.getElementById('g-copy').onclick = () => {
+        navigator.clipboard.writeText(url.toString());
+        document.getElementById('g-copy').textContent = 'Copied!';
+        setTimeout(() => { document.getElementById('g-copy').textContent = 'Copy link'; }, 1500);
+      };
+    });
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+</script>
+
+</body>
+</html>
