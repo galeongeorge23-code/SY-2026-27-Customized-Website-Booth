@@ -174,141 +174,74 @@
     position: relative;
     opacity: 0;
     pointer-events: none;
+    border-radius: 12px;
   }
   .envelope-wrapper.open .card {
     opacity: 1;
     pointer-events: auto;
   }
+  .card .heading { 
+    font-size: 28px; 
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
   .card .from { font-size: 12px; margin-bottom: 12px; }
   .card .to { font-size: 13px; margin-bottom: 6px; }
-  .card .message { font-size: 24px; line-height: 1.4; margin: 12px 0 16px; }
+  .card .message { 
+    font-size: 20px; 
+    line-height: 1.5; 
+    margin: 8px 0 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
   .card .sign { font-size: 13px; }
 
-  /* ===== THEME: ROMANCE ===== */
-  body.romance {
-    background: linear-gradient(135deg, #F7E8E3 0%, #F5E6DD 100%);
-  }
-  body.romance .headline { color: #B23A48; }
-  body.romance .subheadline { color: #8B6B6F; }
-  body.romance .card {
-    background: #FFFBF8;
-    border-radius: 8px;
-    border: 1px solid #F0D9CE;
-    box-shadow: 0 24px 48px -20px rgba(178,58,72,0.2);
-  }
-  body.romance .to, body.romance .from {
-    font-family: 'Cormorant Garamond', serif;
-    color: #6B4949;
-    opacity: 0.7;
-  }
-  body.romance .message {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 500;
-    color: #B23A48;
-    letter-spacing: 0.02em;
-  }
-  body.romance .sign {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #B23A48;
-  }
-
-  /* ===== THEME: CASUAL ===== */
-  body.casual {
+  /* ===== THEME: PLAIN ===== */
+  body.plain {
     background: #F9F7F3;
   }
-  body.casual .headline { color: #2B3A4A; }
-  body.casual .subheadline { color: #7A8B97; }
-  body.casual .card {
+  body.plain .headline { color: #2B3A4A; }
+  body.plain .subheadline { color: #7A8B97; }
+  body.plain .card {
     background: #FFFFFF;
-    border-radius: 16px;
     border: 2px solid #E8D5C4;
     box-shadow: 0 16px 40px -12px rgba(43,58,74,0.12);
   }
-  body.casual .to, body.casual .from {
+  body.plain .heading { color: #2B3A4A; }
+  body.plain .to, body.plain .from {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: #5A7380;
   }
-  body.casual .message {
+  body.plain .message {
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     color: #2B3A4A;
   }
-  body.casual .sign {
+  body.plain .sign {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     color: #7A8B97;
   }
 
-  /* ===== THEME: HANDWRITTEN (PAPER PAD) ===== */
-  body.handwritten {
-    background: linear-gradient(135deg, #FFF9E6 0%, #FFEDD1 100%);
-  }
-  body.handwritten .headline { color: #D4A017; font-size: 32px; }
-  body.handwritten .subheadline { color: #B8860B; }
-  body.handwritten .card {
-    background: linear-gradient(to right, #FFFBF0 0%, #FFFEF9 100%);
-    border-radius: 2px;
-    border: 1px solid #E8DFD3;
-    box-shadow: 0 12px 28px -8px rgba(139,105,20,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
-    position: relative;
-  }
-  body.handwritten .card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 8px;
-    height: 100%;
-    background: #D4A017;
-  }
-  body.handwritten .to, body.handwritten .from {
-    font-family: 'Caveat', cursive;
-    font-size: 16px;
-    color: #5C3F36;
-    font-weight: 600;
-  }
-  body.handwritten .message {
-    font-family: 'Caveat', cursive;
-    font-size: 42px;
-    font-weight: 400;
-    color: #3A2E2A;
-    letter-spacing: 0.02em;
-  }
-  body.handwritten .sign {
-    font-family: 'Caveat', cursive;
-    font-size: 28px;
-    color: #5C3F36;
-  }
-
-  /* ===== THEME: MODERN (TECH/NEON) ===== */
-  body.modern {
+  /* ===== THEME: NEON ART ===== */
+  body.neon {
     background: #0D0D0D;
     background-image: 
       linear-gradient(0deg, transparent 24%, rgba(0, 255, 200, 0.05) 25%, rgba(0, 255, 200, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 200, 0.05) 75%, rgba(0, 255, 200, 0.05) 76%, transparent 77%, transparent),
       linear-gradient(90deg, transparent 24%, rgba(0, 255, 200, 0.05) 25%, rgba(0, 255, 200, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 200, 0.05) 75%, rgba(0, 255, 200, 0.05) 76%, transparent 77%, transparent);
     background-size: 60px 60px;
   }
-  body.modern .headline { color: #00FFC8; font-weight: 700; letter-spacing: 0.15em; }
-  body.modern .subheadline { color: #00FFC8; opacity: 0.6; }
-  body.modern .card {
+  body.neon .headline { color: #00FFC8; font-weight: 700; letter-spacing: 0.15em; }
+  body.neon .subheadline { color: #00FFC8; opacity: 0.6; }
+  body.neon .card {
     background: #1A1A1A;
-    border-radius: 0;
     border: 3px solid #00FFC8;
     box-shadow: 0 0 30px rgba(0, 255, 200, 0.3), inset 0 0 30px rgba(0, 255, 200, 0.05);
-    position: relative;
   }
-  body.modern .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: 
-      linear-gradient(90deg, transparent 0%, rgba(0, 255, 200, 0.03) 50%, transparent 100%);
-    pointer-events: none;
-  }
-  body.modern .to, body.modern .from {
+  body.neon .heading { color: #00FFC8; }
+  body.neon .to, body.neon .from {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 10px;
@@ -317,14 +250,12 @@
     color: #00FFC8;
     opacity: 0.8;
   }
-  body.modern .message {
+  body.neon .message {
     font-family: 'Poppins', sans-serif;
-    font-weight: 700;
     color: #FFFFFF;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
   }
-  body.modern .sign {
+  body.neon .sign {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     color: #00FFC8;
@@ -333,93 +264,168 @@
     letter-spacing: 0.2em;
   }
 
-  /* ===== THEME: PROFESSIONAL (LUXURY CERTIFICATE) ===== */
-  body.professional {
-    background: linear-gradient(135deg, #F4EDE4 0%, #EFE6DC 100%);
+  /* ===== THEME: MINTY GREEN ===== */
+  body.minty {
+    background: linear-gradient(135deg, #E0F9F7 0%, #D1F5F2 100%);
   }
-  body.professional .headline { 
-    font-family: 'Playfair Display', serif;
-    color: #5D4E37; 
-    font-weight: 700;
-    font-size: 40px;
-    letter-spacing: 0.08em;
+  body.minty .headline { color: #1A7F7E; font-weight: 700; }
+  body.minty .subheadline { color: #2A9E9D; }
+  body.minty .card {
+    background: #F5FFFE;
+    border: 2px solid #7DD3C0;
+    box-shadow: 0 16px 40px -12px rgba(26,127,126,0.15);
   }
-  body.professional .subheadline { color: #9B8B7E; font-weight: 600; }
-  body.professional .card {
-    background: #FDFAF6;
-    border-radius: 0;
-    border: 3px solid #D4AF37;
-    box-shadow: 0 20px 50px -15px rgba(93,78,55,0.3), 
-                inset 0 0 40px rgba(212,175,55,0.1),
-                0 0 0 1px rgba(212,175,55,0.5);
-    position: relative;
-    padding-left: 56px !important;
-  }
-  body.professional .card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 12px;
-    background: linear-gradient(90deg, #D4AF37 0%, #E8C547 50%, #D4AF37 100%);
-  }
-  body.professional .card::after {
-    content: '';
-    position: absolute;
-    top: 16px; right: 16px;
-    width: 48px; height: 48px;
-    border: 2px solid #D4AF37;
-    border-radius: 50%;
-    opacity: 0.3;
-  }
-  body.professional .to, body.professional .from {
-    font-family: 'Playfair Display', serif;
+  body.minty .heading { color: #1A7F7E; }
+  body.minty .to, body.minty .from {
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    color: #5D4E37;
-    letter-spacing: 0.05em;
+    color: #3B9B98;
   }
-  body.professional .message {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: #5D4E37;
-    font-size: 28px;
-    letter-spacing: 0.03em;
-    line-height: 1.5;
+  body.minty .message {
+    font-family: 'Poppins', sans-serif;
+    color: #1A7F7E;
   }
-  body.professional .sign {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    color: #5D4E37;
-    font-size: 18px;
-    letter-spacing: 0.05em;
+  body.minty .sign {
+    font-family: 'Poppins', sans-serif;
+    color: #3B9B98;
   }
 
-  /* ===== THEME: WARM ===== */
-  body.warm {
-    background: linear-gradient(135deg, #F5E6D3 0%, #F9EBD9 100%);
+  /* ===== THEME: LOVELY RED ===== */
+  body.lovely {
+    background: linear-gradient(135deg, #F7E8E3 0%, #F5E6DD 100%);
   }
-  body.warm .headline { color: #A67055; }
-  body.warm .subheadline { color: #C99070; }
-  body.warm .card {
-    background: linear-gradient(135deg, #FDFAF6 0%, #FFFCF9 100%);
-    border-radius: 12px;
-    border: 2px solid #E8D5C4;
-    box-shadow: 0 16px 40px -12px rgba(166,112,85,0.15);
+  body.lovely .headline { color: #B23A48; font-weight: 700; }
+  body.lovely .subheadline { color: #8B6B6F; }
+  body.lovely .card {
+    background: #FFFBF8;
+    border: 1px solid #F0D9CE;
+    box-shadow: 0 24px 48px -20px rgba(178,58,72,0.2);
   }
-  body.warm .to, body.warm .from {
-    font-family: 'Poppins', sans-serif;
+  body.lovely .heading { color: #B23A48; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+  body.lovely .to, body.lovely .from {
+    font-family: 'Cormorant Garamond', serif;
+    color: #6B4949;
+    opacity: 0.7;
+  }
+  body.lovely .message {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
     font-weight: 500;
-    color: #8B6F63;
+    color: #B23A48;
   }
-  body.warm .message {
+  body.lovely .sign {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #B23A48;
+  }
+
+  /* ===== THEME: FIERY ===== */
+  body.fiery {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+  }
+  body.fiery .headline { color: #FFFFFF; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+  body.fiery .subheadline { color: rgba(255,255,255,0.8); }
+  body.fiery .card {
+    background: #FFF5EB;
+    border: 3px solid #FF6B35;
+    box-shadow: 0 20px 50px -15px rgba(255,107,53,0.4);
+  }
+  body.fiery .heading { color: #FF6B35; }
+  body.fiery .to, body.fiery .from {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    color: #A67055;
+    color: #E65500;
   }
-  body.warm .sign {
+  body.fiery .message {
     font-family: 'Poppins', sans-serif;
+    color: #D94D0A;
     font-weight: 500;
-    color: #8B6F63;
+  }
+  body.fiery .sign {
+    font-family: 'Poppins', sans-serif;
+    color: #FF6B35;
+    font-weight: 600;
+  }
+
+  /* ===== THEME: COLORFUL & ARTSY ===== */
+  body.artsy {
+    background: linear-gradient(135deg, #FFD93D 0%, #FF6B9D 50%, #6BCB77 100%);
+  }
+  body.artsy .headline { color: #FFFFFF; font-weight: 700; text-shadow: 2px 2px 6px rgba(0,0,0,0.2); }
+  body.artsy .subheadline { color: rgba(255,255,255,0.85); }
+  body.artsy .card {
+    background: #FFFAEB;
+    border: 4px dashed #FF6B9D;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -15px rgba(0,0,0,0.2);
+  }
+  body.artsy .heading { color: #FF6B9D; }
+  body.artsy .to, body.artsy .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #FFD93D;
+  }
+  body.artsy .message {
+    font-family: 'Poppins', sans-serif;
+    color: #FF6B9D;
+    font-weight: 600;
+  }
+  body.artsy .sign {
+    font-family: 'Poppins', sans-serif;
+    color: #6BCB77;
+    font-weight: 700;
+  }
+
+  /* ===== THEME: PURPLE ===== */
+  body.purple {
+    background: linear-gradient(135deg, #E9D5FF 0%, #DDD6FE 100%);
+  }
+  body.purple .headline { color: #6D28D9; font-weight: 700; }
+  body.purple .subheadline { color: #8B5CF6; }
+  body.purple .card {
+    background: #FAFAFA;
+    border: 2px solid #C4B5FD;
+    box-shadow: 0 16px 40px -12px rgba(109,40,217,0.15);
+  }
+  body.purple .heading { color: #6D28D9; }
+  body.purple .to, body.purple .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #8B5CF6;
+  }
+  body.purple .message {
+    font-family: 'Poppins', sans-serif;
+    color: #6D28D9;
+  }
+  body.purple .sign {
+    font-family: 'Poppins', sans-serif;
+    color: #8B5CF6;
+  }
+
+  /* ===== THEME: SKY BLUE ===== */
+  body.skyblue {
+    background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+  }
+  body.skyblue .headline { color: #0369A1; font-weight: 700; }
+  body.skyblue .subheadline { color: #0EA5E9; }
+  body.skyblue .card {
+    background: #F8FBFF;
+    border: 2px solid #7DD3FC;
+    box-shadow: 0 16px 40px -12px rgba(3,105,161,0.15);
+  }
+  body.skyblue .heading { color: #0369A1; }
+  body.skyblue .to, body.skyblue .from {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #0EA5E9;
+  }
+  body.skyblue .message {
+    font-family: 'Poppins', sans-serif;
+    color: #0369A1;
+  }
+  body.skyblue .sign {
+    font-family: 'Poppins', sans-serif;
+    color: #0EA5E9;
   }
 
   /* ===== GENERATOR (staff view) ===== */
@@ -460,12 +466,13 @@
   const params = new URLSearchParams(window.location.search);
   const to = params.get('to');
   const from = params.get('from');
+  const heading = params.get('heading');
   const message = params.get('msg');
-  const theme = params.get('theme') || 'casual';
+  const theme = params.get('theme') || 'plain';
 
   const root = document.getElementById('root');
 
-  if (to || from || message) {
+  if (to || from || message || heading) {
     // ---- RENDER PERSONALIZED CARD ----
     document.body.className = theme;
     const container = document.createElement('div');
@@ -495,6 +502,7 @@
         </div>
       </div>
       <div class="card">
+        ${heading ? '<div class="heading">' + escapeHtml(heading) + '</div>' : ''}
         <div class="to">${to ? 'To ' + escapeHtml(to) : ''}</div>
         <div class="message">${escapeHtml(message || '')}</div>
         <div class="sign">${from ? '— ' + escapeHtml(from) : ''}</div>
@@ -524,16 +532,20 @@
         <input id="g-to" placeholder="Recipient's name" />
         <label>From</label>
         <input id="g-from" placeholder="Sender's name" />
+        <label>Heading (optional)</label>
+        <input id="g-heading" placeholder="Message heading" />
         <label>Message</label>
-        <textarea id="g-msg" placeholder="Their message"></textarea>
+        <textarea id="g-msg" placeholder="Type message here. Press Enter for new lines."></textarea>
         <label>Theme</label>
         <select id="g-theme">
-          <option value="romance">Romance</option>
-          <option value="casual" selected>Casual</option>
-          <option value="handwritten">Handwritten (Paper Pad)</option>
-          <option value="modern">Modern</option>
-          <option value="professional">Professional</option>
-          <option value="warm">Warm</option>
+          <option value="plain" selected>Plain</option>
+          <option value="neon">Neon Art</option>
+          <option value="minty">Minty Green</option>
+          <option value="lovely">Lovely Red</option>
+          <option value="fiery">Fiery</option>
+          <option value="artsy">Colorful & Artsy</option>
+          <option value="purple">Purple</option>
+          <option value="skyblue">Sky Blue</option>
         </select>
         <button id="g-generate">Generate link</button>
         <div id="g-result" class="result">
@@ -547,6 +559,7 @@
     document.getElementById('g-generate').addEventListener('click', () => {
       const to = document.getElementById('g-to').value;
       const from = document.getElementById('g-from').value;
+      const heading = document.getElementById('g-heading').value;
       const msg = document.getElementById('g-msg').value;
       const theme = document.getElementById('g-theme').value;
       const url = new URL(window.location.href);
@@ -554,6 +567,7 @@
       const p = new URLSearchParams();
       if (to) p.set('to', to);
       if (from) p.set('from', from);
+      if (heading) p.set('heading', heading);
       if (msg) p.set('msg', msg);
       p.set('theme', theme);
       url.search = p.toString();
