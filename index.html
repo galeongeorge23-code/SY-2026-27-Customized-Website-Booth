@@ -312,6 +312,65 @@
   }
   .card .sign { font-size: 13px; }
 
+  /* ===== BACKGROUND LINE PATTERNS =====
+     Each theme gets a different, subtle line motif. Neon keeps its original grid unchanged. */
+  body:not(.neon)::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.34;
+  }
+  body:not(.neon) .page-container { position: relative; z-index: 1; }
+
+  /* Plain — clean architectural grid */
+  body.plain::before {
+    background-image:
+      linear-gradient(rgba(90,115,128,.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,115,128,.10) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+
+  /* Minty — soft flowing waves */
+  body.minty::before {
+    background-image: repeating-radial-gradient(ellipse at 0 50%, transparent 0 18px, rgba(26,127,126,.12) 19px 20px, transparent 21px 38px);
+    background-size: 110px 78px;
+  }
+
+  /* Lovely — gentle diagonal ribbons */
+  body.lovely::before {
+    background-image: repeating-linear-gradient(135deg, transparent 0 25px, rgba(210,65,119,.12) 26px 28px, transparent 29px 52px);
+    background-size: 74px 74px;
+  }
+
+  /* Fiery — energetic zigzag lines */
+  body.fiery::before {
+    background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(142,28,25,.13) 12px 14px, transparent 15px 24px), repeating-linear-gradient(45deg, transparent 0 11px, rgba(255,236,137,.12) 12px 14px, transparent 15px 24px);
+    background-size: 48px 48px;
+  }
+
+  /* Colorful & Artsy — balanced rainbow diagonal line bands */
+  body.artsy::before {
+    background-image: repeating-linear-gradient(115deg, rgba(255,89,94,.13) 0 3px, transparent 3px 22px, rgba(255,202,58,.13) 22px 25px, transparent 25px 44px, rgba(138,201,38,.13) 44px 47px, transparent 47px 66px, rgba(25,130,196,.13) 66px 69px, transparent 69px 88px, rgba(106,76,147,.13) 88px 91px, transparent 91px 110px);
+    background-size: 110px 110px;
+  }
+
+  /* Purple — layered curved waves */
+  body.purple::before {
+    background-image: repeating-radial-gradient(ellipse at 100% 0%, transparent 0 20px, rgba(109,40,217,.12) 21px 23px, transparent 24px 42px);
+    background-size: 120px 90px;
+  }
+
+  /* Sky Blue — offset fine grid */
+  body.skyblue::before {
+    background-image:
+      linear-gradient(rgba(3,105,161,.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,165,233,.11) 1px, transparent 1px);
+    background-size: 34px 34px;
+    transform: rotate(-1deg) scale(1.02);
+  }
+
   /* ===== THEME: PLAIN ===== */
   body.plain {
     background: #F9F7F3;
