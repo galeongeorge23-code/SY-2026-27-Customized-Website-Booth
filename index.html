@@ -61,6 +61,15 @@
   .envelope-wrapper.open .envelope { animation: envelopeOpen 0.8s ease forwards; }
   .envelope-wrapper.open .card { animation: cardSlideOut 0.8s ease 0.4s forwards; }
 
+  /* Keep the revealed card in the same page flow as the envelope, so it
+     appears directly beneath the envelope instead of dropping too low. */
+  .envelope-wrapper.open { margin-bottom: 32px; }
+  .envelope-wrapper.open .card { position: absolute; top: 0; left: 50%; transform: translate(-50%, 20px); }
+  @keyframes cardSlideOut {
+    0% { transform: translate(-50%, 20px); opacity: 0; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+  }
+
   @keyframes envelopeOpen {
     0% { transform: rotateX(0deg); opacity: 1; }
     50% { transform: rotateX(-60deg); }
