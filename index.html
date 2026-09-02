@@ -168,12 +168,12 @@
   /* ===== UNIQUE ENVELOPE DESIGNS PER THEME ===== */
   /* Every theme gets its own envelope treatment rather than sharing one envelope skin. */
   body.plain .envelope {
-    background: linear-gradient(145deg, #fffdf8, #efe4d6);
+    background: #f4eadc;
     border: 2px solid #cbb39a;
     box-shadow: 0 20px 50px -15px rgba(72,54,42,0.22), inset 0 1px 0 rgba(255,255,255,0.8);
   }
-  body.plain .envelope::before { background: linear-gradient(145deg, #f3e5d5, #d8c1aa); }
-  body.plain .envelope-seal { background: radial-gradient(circle at 30% 30%, #b8734d, #6f3d26); border-color: #59301f; }
+  body.plain .envelope::before { background: #e2cdb5; }
+  body.plain .envelope-seal { background: #8a4b2d; border-color: #59301f; }
 
   body.neon .envelope {
     background: #111827;
@@ -187,6 +187,7 @@
   body.neon .envelope-main, body.neon .envelope-sub { color:#00ffc8; }
 
   /* Theme-specific line patterns — neon remains unchanged. */
+  /* legacy decoration patterns retained for structure; visible pattern is applied directly to envelope above. */
   body.plain .envelope-decoration { background-image: repeating-linear-gradient(0deg, transparent 0 23px, rgba(139,93,67,.10) 24px), repeating-linear-gradient(90deg, transparent 0 23px, rgba(139,93,67,.07) 24px); }
   body.minty .envelope-decoration { background-image: repeating-linear-gradient(0deg, transparent 0 18px, rgba(23,107,73,.13) 19px), repeating-linear-gradient(90deg, transparent 0 18px, rgba(39,141,100,.10) 19px); }
   body.lovely .envelope-decoration { background-image: repeating-linear-gradient(0deg, transparent 0 20px, rgba(185,47,97,.12) 21px), repeating-linear-gradient(90deg, transparent 0 20px, rgba(232,90,138,.10) 21px); }
@@ -196,70 +197,88 @@
   body.skyblue .envelope-decoration { background-image: repeating-linear-gradient(0deg, transparent 0 18px, rgba(30,64,175,.12) 19px), repeating-linear-gradient(90deg, transparent 0 24px, rgba(14,165,233,.10) 25px); }
 
   body.minty .envelope {
-    background: linear-gradient(135deg, #effff8 0%, #b9f1d8 45%, #76d6ad 100%);
+    background: #b9efd3;
     border: 3px solid #39a978;
     box-shadow: 0 20px 50px -15px rgba(27,126,87,.3), inset 0 1px 0 rgba(255,255,255,.75);
   }
-  body.minty .envelope::before { background: linear-gradient(135deg, #c9f7e2, #4db889, #247a59); }
-  body.minty .envelope::after { content:''; position:absolute; left:10%; right:10%; bottom:12%; height:28%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent); transform:skewX(-18deg); pointer-events:none; }
-  body.minty .envelope-stamp { background:linear-gradient(135deg,#9bf0c6,#21845d); border-color:#176546; }
-  body.minty .envelope-seal { background:radial-gradient(circle at 30% 30%,#55d89a,#176b49); border-color:#0f5237; }
+  body.minty .envelope::before { background: #5bbd91; }
+  body.minty .envelope::after { content:''; position:absolute; left:10%; right:10%; bottom:12%; height:28%; background:rgba(255,255,255,.16); transform:skewX(-18deg); pointer-events:none; }
+  body.minty .envelope-stamp { background:#62c99a; border-color:#176546; }
+  body.minty .envelope-seal { background:#23865c; border-color:#0f5237; }
   body.minty .envelope-main, body.minty .envelope-sub { color:#176b49; }
 
   body.lovely .envelope {
-    background: linear-gradient(145deg, #fff4f5, #f3c1cf);
+    background: #f3c1cf;
     border: 3px solid #b92f61;
     box-shadow: 0 20px 50px -15px rgba(165,35,82,.3), inset 0 1px 0 rgba(255,255,255,.75);
   }
-  body.lovely .envelope::before { background: linear-gradient(145deg, #ffd8e2, #d95782, #9f2753); }
+  body.lovely .envelope::before { background: #df7398; }
   body.lovely .envelope::after { content:'♥'; position:absolute; left:20px; bottom:14px; color:rgba(185,47,97,.28); font-size:28px; pointer-events:none; }
-  body.lovely .envelope-stamp { background:linear-gradient(135deg,#f6a1bd,#b92f61); border-color:#8d2049; }
-  body.lovely .envelope-seal { background:radial-gradient(circle at 30% 30%,#e95a8a,#8f1745); border-color:#721337; }
+  body.lovely .envelope-stamp { background:#e982a4; border-color:#8d2049; }
+  body.lovely .envelope-seal { background:#c93f70; border-color:#721337; }
   body.lovely .envelope-main, body.lovely .envelope-sub { color:#8f1745; }
 
   body.fiery .envelope {
-    background: linear-gradient(135deg, #fff1d6 0%, #ffb347 35%, #ff6338 70%, #b51f2e 100%);
+    background: #ff7138;
     border: 3px solid #b51f2e;
     box-shadow: 0 22px 52px -15px rgba(181,31,46,.42), inset 0 1px 0 rgba(255,255,255,.6);
   }
-  body.fiery .envelope::before { background: linear-gradient(135deg, #ffd56a, #ff7a2f 50%, #c5282f); }
-  body.fiery .envelope::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 15% 80%,rgba(255,244,180,.45),transparent 28%),radial-gradient(circle at 85% 20%,rgba(255,255,255,.25),transparent 22%); pointer-events:none; }
-  body.fiery .envelope-stamp { background:linear-gradient(135deg,#ffe08a,#e33b24); border-color:#a51e24; }
-  body.fiery .envelope-seal { background:radial-gradient(circle at 30% 30%,#ffdf55,#d52220 55%,#851625); border-color:#71151f; }
+  body.fiery .envelope::before { background: #e94b2f; }
+  body.fiery .envelope::after { content:''; position:absolute; inset:0; background:rgba(255,255,255,.10); pointer-events:none; }
+  body.fiery .envelope-stamp { background:#f08a3e; border-color:#a51e24; }
+  body.fiery .envelope-seal { background:#d93425; border-color:#71151f; }
   body.fiery .envelope-main, body.fiery .envelope-sub { color:#8b1e1e; }
 
   body.artsy .envelope {
-    background: conic-gradient(from 210deg at 50% 50%, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff595e);
+    background: #ffca3a;
     border: 4px solid #ffffff;
     box-shadow: 0 20px 50px -15px rgba(0,0,0,.28), inset 0 0 0 3px rgba(255,255,255,.45);
   }
-  body.artsy .envelope::before { background: linear-gradient(135deg, #ffca3a, #1982c4 50%, #6a4c93); border-bottom:2px solid rgba(255,255,255,.6); }
+  body.artsy .envelope::before { background: #1982c4; border-bottom:2px solid rgba(255,255,255,.6); }
   body.artsy .envelope::after { content:''; position:absolute; inset:12px; border:3px dotted rgba(255,255,255,.75); pointer-events:none; }
-  body.artsy .envelope-stamp { background:linear-gradient(135deg,#ff595e,#ffca3a,#8ac926,#1982c4,#6a4c93); border:2px dashed #fff; }
-  body.artsy .envelope-seal { background:conic-gradient(#ff595e,#ffca3a,#8ac926,#1982c4,#6a4c93,#ff595e); border-color:#fff; }
+  body.artsy .envelope-stamp { background:#8ac926; border:2px dashed #fff; }
+  body.artsy .envelope-seal { background:#ff595e; border-color:#fff; }
   body.artsy .envelope-main, body.artsy .envelope-sub { color:#fff; text-shadow:0 2px 4px rgba(0,0,0,.35); }
 
   body.purple .envelope {
-    background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 30%, #c084fc 65%, #7e22ce 100%);
+    background: #c4a1ed;
     border: 3px solid #7e22ce;
     box-shadow: 0 20px 50px -15px rgba(109,40,217,.35), inset 0 1px 0 rgba(255,255,255,.7);
   }
-  body.purple .envelope::before { background: linear-gradient(135deg, #e9d5ff, #a855f7 48%, #581c87); }
+  body.purple .envelope::before { background: #8b5cc7; }
   body.purple .envelope::after { content:''; position:absolute; width:140px; height:140px; border-radius:50%; right:-55px; bottom:-75px; background:rgba(255,255,255,.12); pointer-events:none; }
-  body.purple .envelope-stamp { background:linear-gradient(135deg,#d8b4fe,#7e22ce); border-color:#581c87; }
-  body.purple .envelope-seal { background:radial-gradient(circle at 30% 30%,#c084fc,#7e22ce 60%,#4c1d95); border-color:#4c1d95; }
+  body.purple .envelope-stamp { background:#a855f7; border-color:#581c87; }
+  body.purple .envelope-seal { background:#7e22ce; border-color:#4c1d95; }
   body.purple .envelope-main, body.purple .envelope-sub { color:#581c87; }
 
   body.skyblue .envelope {
-    background: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 32%, #38bdf8 62%, #1d4ed8 100%);
+    background: #7dd3fc;
     border: 3px solid #2563eb;
     box-shadow: 0 20px 50px -15px rgba(29,78,216,.3), inset 0 1px 0 rgba(255,255,255,.72);
   }
-  body.skyblue .envelope::before { background: linear-gradient(135deg, #dff6ff, #60c9f7 45%, #2563eb); }
+  body.skyblue .envelope::before { background: #3b9fe0; }
   body.skyblue .envelope::after { content:''; position:absolute; width:180px; height:70px; border-radius:50%; border:2px solid rgba(255,255,255,.32); right:-35px; bottom:-25px; transform:rotate(-12deg); pointer-events:none; }
-  body.skyblue .envelope-stamp { background:linear-gradient(135deg,#7dd3fc,#2563eb,#1e3a8a); border-color:#1e40af; }
-  body.skyblue .envelope-seal { background:radial-gradient(circle at 30% 30%,#7dd3fc,#2563eb 58%,#1e3a8a); border-color:#1e3a8a; }
+  body.skyblue .envelope-stamp { background:#3b82f6; border-color:#1e40af; }
+  body.skyblue .envelope-seal { background:#2563eb; border-color:#1e3a8a; }
   body.skyblue .envelope-main, body.skyblue .envelope-sub { color:#0c4a6e; }
+
+  /* Visible line patterns sit directly on each non-Neon envelope background. */
+  body.plain .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 20px, rgba(139,93,67,.13) 21px), repeating-linear-gradient(90deg, transparent 0 20px, rgba(139,93,67,.09) 21px); }
+  body.minty .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 16px, rgba(23,107,73,.17) 17px), repeating-linear-gradient(90deg, transparent 0 16px, rgba(39,141,100,.12) 17px); }
+  body.lovely .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 18px, rgba(185,47,97,.15) 19px), repeating-linear-gradient(90deg, transparent 0 18px, rgba(232,90,138,.12) 19px); }
+  body.fiery .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 14px, rgba(132,24,30,.17) 15px), repeating-linear-gradient(90deg, transparent 0 24px, rgba(255,214,82,.16) 25px); }
+  body.artsy .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 18px, rgba(255,255,255,.25) 19px), repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.20) 19px); }
+  body.purple .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 17px, rgba(88,28,135,.15) 18px), repeating-linear-gradient(90deg, transparent 0 17px, rgba(126,34,206,.12) 18px); }
+  body.skyblue .envelope::before { background-image:repeating-linear-gradient(0deg, transparent 0 16px, rgba(30,64,175,.15) 17px), repeating-linear-gradient(90deg, transparent 0 22px, rgba(14,165,233,.12) 23px); }
+
+  body.plain .envelope { background-color:#f4eadc; background-image:repeating-linear-gradient(0deg, transparent 0 23px, rgba(139,93,67,.14) 24px), repeating-linear-gradient(90deg, transparent 0 23px, rgba(139,93,67,.10) 24px); }
+  body.minty .envelope { background-color:#b9efd3; background-image:repeating-linear-gradient(0deg, transparent 0 18px, rgba(23,107,73,.18) 19px), repeating-linear-gradient(90deg, transparent 0 18px, rgba(39,141,100,.14) 19px); }
+  body.lovely .envelope { background-color:#f3c1cf; background-image:repeating-linear-gradient(0deg, transparent 0 20px, rgba(185,47,97,.16) 21px), repeating-linear-gradient(90deg, transparent 0 20px, rgba(232,90,138,.13) 21px); }
+  body.fiery .envelope { background-color:#ff7138; background-image:repeating-linear-gradient(0deg, transparent 0 16px, rgba(132,24,30,.18) 17px), repeating-linear-gradient(90deg, transparent 0 28px, rgba(255,214,82,.17) 29px); }
+  body.artsy .envelope { background-color:#ffca3a; background-image:repeating-linear-gradient(0deg, transparent 0 21px, rgba(255,255,255,.28) 22px), repeating-linear-gradient(90deg, transparent 0 21px, rgba(25,130,196,.20) 22px); }
+  body.purple .envelope { background-color:#c4a1ed; background-image:repeating-linear-gradient(0deg, transparent 0 19px, rgba(88,28,135,.16) 20px), repeating-linear-gradient(90deg, transparent 0 19px, rgba(126,34,206,.13) 20px); }
+  body.skyblue .envelope { background-color:#7dd3fc; background-image:repeating-linear-gradient(0deg, transparent 0 18px, rgba(30,64,175,.16) 19px), repeating-linear-gradient(90deg, transparent 0 24px, rgba(14,165,233,.14) 25px); }
+
 
   /* ===== CARD BASE ===== */
   .card {
