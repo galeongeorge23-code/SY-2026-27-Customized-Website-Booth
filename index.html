@@ -139,16 +139,6 @@
     border: 2px solid #6B2817;
   }
 
-  .envelope-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    text-align: center;
-    pointer-events: none;
-  }
-
   .envelope-main {
     font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
@@ -186,8 +176,8 @@
   }
   body.neon .envelope::before { background: linear-gradient(135deg, #182d39, #073f45); border-bottom-color: rgba(0,255,200,.35); }
   body.neon .envelope::after { content:''; position:absolute; inset:10px; border:1px solid rgba(255,0,180,.45); pointer-events:none; }
-  body.neon .envelope-stamp { background: linear-gradient(135deg,#ff00b8,#7048ff); border-color:#00ffc8; }
-  body.neon .envelope-seal { background: radial-gradient(circle at 30% 30%, #ff3dc8, #7427c7); border-color:#ff00b8; box-shadow:0 0 18px rgba(255,0,184,.65); }
+  body.neon .envelope-stamp { background: linear-gradient(135deg,#4287f5,#37a0f0); border-color:#3badc4; }
+  body.neon .envelope-seal { background: radial-gradient(circle at 30% 30%, ##4287f5, ##37a0f0); border-color:##3badc4; box-shadow:0 0 18px rgba(255,0,184,.65); }
   body.neon .envelope-main, body.neon .envelope-sub { color:#00ffc8; }
 
   /* Theme-specific line patterns — neon remains unchanged. */
@@ -706,7 +696,7 @@
     container.innerHTML = `
       <div class="generator">
         <h1>Message Booth Generator</h1>
-        <p class="sub">Fill in the customer's details, generate their link.</p>
+        <p class="sub">Fill in the Student's details, generate their link.</p>
         <label>To</label>
         <input id="g-to" placeholder="Recipient's name" />
         <label>From</label>
@@ -720,8 +710,8 @@
           <option value="plain" selected>Plain</option>
           <option value="neon">Neon Art</option>
           <option value="minty">Minty Green</option>
-          <option value="lovely">Lovely Red</option>
-          <option value="fiery">Fiery</option>
+          <option value="lovely">Lovely Pink</option>
+          <option value="fiery">Fiery Red</option>
           <option value="artsy">Colorful & Artsy</option>
           <option value="purple">Purple</option>
           <option value="skyblue">Sky Blue</option>
